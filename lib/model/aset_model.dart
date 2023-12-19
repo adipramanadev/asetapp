@@ -1,62 +1,35 @@
 class AssetModel {
-  bool? success;
-  List<Data>? data;
+  AssetModel({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.image,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-  AssetModel({this.success, this.data});
+  String id;
+  String name;
+  String type;
+  String image;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-  AssetModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
+  factory AssetModel.fromJson(Map<String, dynamic> json) => AssetModel(
+        id: json["id"],
+        name: json["name"],
+        type: json["type"],
+        image: json["image"],
+        createdAt: DateTime.parse(json["created_at"]).toLocal(),
+        updatedAt: DateTime.parse(json["updated_at"]).toLocal(),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Data {
-  String? id;
-  String? name;
-  String? type;
-  String? image;
-  String? createdAt;
-  String? updatedAt;
-
-  Data(
-      {this.id,
-      this.name,
-      this.type,
-      this.image,
-      this.createdAt,
-      this.updatedAt});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    type = json['type'];
-    image = json['image'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['image'] = this.image;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "type": type,
+        "image": image,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }
