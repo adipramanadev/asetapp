@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../config/app_constant.dart';
 import '../../model/aset_model.dart';
+import 'updateasset.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,17 +51,18 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => UpdateAssetPage(
-                //       oldAsset: item,
-                //     ),
-                //   ),
-                // ).then((value) => readAssets());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateAssetPage(
+                      oldAsset: item,
+                    ),
+                  ),
+                ).then((value) => readAssets());
               },
               horizontalTitleGap: 0,
-              leading: const Icon(Icons.edit, color: Colors.blue),
+              leading: const Icon(Icons.edit,
+                  color: Color.fromARGB(255, 67, 83, 96)),
               title: const Text('Update'),
             ),
             ListTile(
@@ -258,6 +260,4 @@ class _HomePageState extends State<HomePage> {
             ),
     );
   }
-
-  
 }
