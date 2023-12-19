@@ -17,7 +17,7 @@ class DatabaseHelper {
         var data = json.decode(response.body);
 
         bool loginSuccess = data['status'] == 'success';
-
+        print(loginSuccess);
         return loginSuccess;
       } else {
         print('Server error: ${response.statusCode}');

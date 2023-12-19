@@ -1,6 +1,5 @@
 import 'package:asetapp/config/app_constant.dart';
 import 'package:asetapp/helpers/helper.dart';
-import 'package:d_info/d_info.dart';
 import 'package:flutter/material.dart';
 
 import '../aset/homepage.dart';

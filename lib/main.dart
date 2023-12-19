@@ -1,3 +1,4 @@
+import 'package:asetapp/pages/aset/homepage.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/user/loginpage.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
