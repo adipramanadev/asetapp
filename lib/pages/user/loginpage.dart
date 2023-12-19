@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  DatabaseHelper dbHelper = DatabaseHelper();
 
   void _klikLogin(BuildContext context) async {
     if (formKey.currentState!.validate()) {
