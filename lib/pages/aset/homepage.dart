@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../config/app_constant.dart';
 import '../../model/aset_model.dart';
+import 'createasset.dart';
 import 'updateasset.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //var model
   List<AssetModel> assets = [];
 
   readAssets() async {
@@ -156,12 +158,12 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const CreateAssetPage(),
-          //   ),
-          // ).then((value) => readAssets());
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CreateAssetPage(),
+            ),
+          ).then((value) => readAssets());
         },
         child: const Icon(Icons.add),
       ),
