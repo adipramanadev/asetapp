@@ -6,7 +6,6 @@ import 'dart:typed_data';
 import 'package:d_info/d_info.dart';
 import 'package:d_input/d_input.dart';
 import 'package:d_method/d_method.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
