@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:asetapp/config/app_constant.dart';
+import 'package:asetapp/helpers/helper.dart';
 import 'package:d_info/d_info.dart';
-import 'package:d_method/d_method.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../aset/homepage.dart';
 
@@ -15,33 +12,22 @@ class LoginPage extends StatelessWidget {
   TextEditingController txtUsername = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  //function login
-  void login(BuildContext context) {
-    //validasi
-    bool isValid = formKey.currentState!.validate();
 
-    if (isValid) {
-      Uri url = Uri.parse('${BaseUrl.baseUrl}/user/login.php');
-      http.post(
-        url,
-        body: {'username': txtUsername.text, 'password': txtPassword.text},
-      ).then(
-        (response) {
-          DMethod.printResponse(response);
-          Map resBody = jsonDecode(response.body);
-          bool success = resBody['success'] ?? false;
-          if (success) {
-            DInfo.toastSuccess('Login Success');
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          } else {
-            DInfo.toastSuccess('Login Failed');
-          }
-        },
-      ).catchError((onError) {
-        DInfo.toastError('adas yang salah');
-        DMethod.printTitle('catchError', onError.toString());
-      });
+  void _klikLogin(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      bool loginSuccess = await dbHelper.login(
+          txtUsername.text.trim(), txtPassword.text.trim());
+
+      if (loginSuccess) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomePage()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login failed. Please check your credentials.'),
+          ),
+        );
+      }
     }
   }
 
@@ -133,9 +119,7 @@ class LoginPage extends StatelessWidget {
                     height: 20.0,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      login(context);
-                    },
+                    onPressed: () => _klikLogin(context),
                     child: Text(
                       'Login',
                       style: TextStyle(color: Colors.white),
