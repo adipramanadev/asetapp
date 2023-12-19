@@ -11,7 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 import '../../config/app_constant.dart';
-import '../../models/asset_model.dart';
+import '../../model/aset_model.dart';
+// import '../../models/asset_model.dart';
 
 class UpdateAssetPage extends StatefulWidget {
   const UpdateAssetPage({super.key, required this.oldAsset});
@@ -57,7 +58,7 @@ class _UpdateAssetPageState extends State<UpdateAssetPage> {
     // if valid, go on
 
     Uri url = Uri.parse(
-      '${AppConstant.baseURL}/asset/update.php',
+      '${BaseUrl.baseUrl}/asset/update.php',
     );
     try {
       final response = await http.post(url, body: {
@@ -160,7 +161,7 @@ class _UpdateAssetPageState extends State<UpdateAssetPage> {
                 alignment: Alignment.center,
                 child: imageByte == null
                     ? Image.network(
-                        '${AppConstant.baseURL}/image/${widget.oldAsset.image}',
+                        '${BaseUrl.baseUrl}/image/${widget.oldAsset.image}',
                       )
                     : Image.memory(imageByte!),
               ),
